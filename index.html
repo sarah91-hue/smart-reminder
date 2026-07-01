@@ -858,6 +858,23 @@ const PROVIDERS = {
     PGN:        { name:'PGN (Gas)',     color:'#B91C1C', days:30, note:'tagihan bulanan 30 hari' },
 };
 
+const DEFAULT_LINKS = {
+    XL:         'https://www.tokopedia.com/paket-data',
+    Tsel:       'https://www.tokopedia.com/paket-data',
+    Indosat:    'https://www.tokopedia.com/paket-data',
+    Tri:        'https://www.tokopedia.com/paket-data',
+    Smartfren:  'https://www.tokopedia.com/paket-data',
+    Axis:       'https://www.tokopedia.com/paket-data',
+    ByU:        'https://www.tokopedia.com/paket-data',
+    PLN:        'https://www.tokopedia.com/pln',
+    PDAM:       'https://www.tokopedia.com/tagihan/pdam/',
+    PGN:        'https://www.tokopedia.com/tagihan/pgn',
+    IndiHome:   'https://www.tokopedia.com/tv-kabel',
+    FirstMedia: 'https://www.tokopedia.com/tv-kabel',
+    MNCPlay:    'https://www.tokopedia.com/tv-kabel',
+    MyRepublic: 'https://www.tokopedia.com/tv-kabel',
+};
+
 const PROV_MAP = {
     isi_data:      ['XL','Tsel','Indosat','Tri','Smartfren','Axis','ByU'],
     isi_pulsa:     ['XL','Tsel','Indosat','Tri','Smartfren','Axis','ByU'],
@@ -1413,7 +1430,10 @@ const PRESETS_GENERAL = [
 ];
 
 function getLinkConfig() {
-    try { return JSON.parse(localStorage.getItem('smartrem_links') || '{}'); } catch { return {}; }
+    try {
+        const saved = JSON.parse(localStorage.getItem('smartrem_links') || '{}');
+        return { ...DEFAULT_LINKS, ...saved };
+    } catch { return { ...DEFAULT_LINKS }; }
 }
 
 function fillPreset(provKey, link) {
